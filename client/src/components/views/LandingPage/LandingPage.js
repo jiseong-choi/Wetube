@@ -13,7 +13,7 @@ function LandingPage() {
         axios.get('/api/video/getVideos')
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data.videos)
+                    console.log(response.data)
                     setVideos(response.data.videos)
                 } else {
                     alert('Failed to get Videos')
@@ -26,7 +26,6 @@ function LandingPage() {
 
 
     const renderCards = Videos.map((video, index) => {
-
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);
 
@@ -53,8 +52,9 @@ function LandingPage() {
             <span style={{ marginLeft: '3rem' }}> {video.views}</span>
             - <span> {moment(video.createdAt).format("MMM Do YY")} </span>
         </Col>
-
-    })
+        
+    }
+    )
 
 
 
