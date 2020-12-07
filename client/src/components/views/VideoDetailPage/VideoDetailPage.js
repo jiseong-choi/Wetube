@@ -22,31 +22,38 @@ function VideoDetailPage(props) {
             })
     }, [])
 
-    return (
-        <Row>
-            <Col lg={18} xs={24}>
-                <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-                    <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
+    if(Video.writer) {
+        return (
+            <Row>
+                <Col lg={18} xs={24}>
+                    <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
+                        <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
+    
+                        <List.Item
+                            actions
+                        >
+                            <List.Item.Meta
+                                avatar={<Avatar src={Video.writer && Video.writer.image} />}
+                                title={ Video.title }
+                                description={Video.description} 
+                            />
+                            <div></div>
+                        </List.Item>
+    
+                    </div>
+                </Col>
+                <Col lg={6} xs={24}>
+    
+    
+                </Col>
+            </Row>
+        )
+    }else{
+        return (
+            <div>...Loading...</div>
+        )
+    }
 
-                    <List.Item
-                        actions
-                    >
-                        <List.Item.Meta
-                            avatar
-                            title
-                            description
-                        />
-                        <div></div>
-                    </List.Item>
-
-                </div>
-            </Col>
-            <Col lg={6} xs={24}>
-
-
-            </Col>
-        </Row>
-    )
     
 }
 
