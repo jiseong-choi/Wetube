@@ -24,7 +24,7 @@ function Subscribe(props) {
             Axios.post('/api/subscribe/subscribed', subscribedvariable)
                 .then(response=>{
                     if(response.data.success){
-                        setSubscribed(response.data.result)
+                        setSubscribed(response.data.subscribed)
                     }else{
                         alert('정보를 불러오지 못했습니다.')
                     }
@@ -32,7 +32,33 @@ function Subscribe(props) {
     }, [])
 
     const onSubscribe = (e) =>{
-        e.preventDefault()
+
+        let subscribeVariable = {
+            userTo: props.userTo,
+            userFrom:props.userFrom
+        }
+
+        if(Subscribed){
+            Axios.post('/api/subscribe/unSubscribe',subscribeVariable)
+            .then(response=>{
+                if(response.data.success){
+                    setsubscribeNumber(subscribeNumber - 1)
+                    setSubscribed(!Subscribed)
+                }else{
+                    alert('구독 취소하는데 실패했습니다.')
+                }
+            })
+        }else{
+            Axios.post('/api/subscribe/Subscribe',subscribeVariable)
+            .then(response=>{
+                if(response.data.success){
+                    setsubscribeNumber(subscribeNumber + 1)
+                    setSubscribed(!Subscribed)
+                }else{
+                    alert('구독 하는데 실패했습니다.')
+                }
+            })
+        }
     }
 
     return (
