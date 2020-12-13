@@ -3,7 +3,14 @@ import React from 'react'
 function Comment() {
     return (
         <div>
-            Comment
+            <br />
+            <p>Replies</p>
+            <hr />
+
+            {/* Comment Lists */}
+            
+            {/* Root Comment Form */}
+
         </div>
     )
 }

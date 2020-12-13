@@ -11,7 +11,8 @@ function VideoDetailPage(props) {
     const videoVariable = {
         videoId: videoId
     }
-    const [Video,setVideo] = useState([])
+    const [Video, setVideo] = useState([])
+    const [Comments,setComments] = useState(initialState)
 
     useEffect(() => {
         axios.post('/api/video/getVideo', videoVariable)
@@ -23,6 +24,7 @@ function VideoDetailPage(props) {
                     alert('Failed to get video Info')
                 }
             })
+        console.log(Comments)
     }, [])
 
     if (Video.writer) {
