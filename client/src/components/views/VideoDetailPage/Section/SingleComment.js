@@ -1,9 +1,13 @@
 import React,{useState} from 'react'
-import {Comment,Avatar,Button,Input} from 'antd'
+import { Comment, Avatar, Button, Input } from 'antd'
+import Axios from 'axios'
+import {useSelector} from 'react-redux'
 
 const { TextArea } = Input;
 
-function SingleComment() {
+function SingleComment(props) {
+
+    const user = useSelector(state => state.user)
 
     const [OpenRelpy, setOpenReply] = useState(false)
     const [CommentValue,setCommentValue] = useState('')
@@ -20,16 +24,37 @@ function SingleComment() {
         setCommentValue(e.target.CommentValue)
     }
 
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        const variables = {
+            content: CommentValue,
+            writer: user.userData._id,
+            postId: props.postId,
+
+        }
+        
+        Axios.post('/api/comment/saveComment', variables)
+            .then(response => {
+                if (response.data.success) {
+                    console.log(response.data)
+                } else
+                    alert('댓글 등록을 실패하였습니다.')
+        })
+    }
+
+    console.log(props)
+
     return (
         <div>
             <Comment
                 actions={actions}
-                author
-                avatar={<Avatar src alt />}
-                content
+                author={props.comment.writer}
+                avatar={<Avatar src={props.comment.writer.image} alt />}
+                content={<p>{ props.comment.content }</p>}
             />
             {OpenRelpy &&
-            <form style={{ display: 'flex' }} onSubmit >
+            <form style={{ display: 'flex' }} onSubmit={onSubmit} >
                 <textarea
                     style={{ width: '100%', borderRadius: '5px' }}
                     onChange={onHandleChange}
@@ -37,7 +62,7 @@ function SingleComment() {
                     placeholder='댓글을 작성해 주세요'
                 />
                 <br />
-                <button style={{width:'20%', height:'52px'}} onClick >Submit</button>
+                <button style={{width:'20%', height:'52px'}} onClick={onSubmit} >Submit</button>
                 </form>   
             }
         </div>

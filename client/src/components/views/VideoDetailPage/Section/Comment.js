@@ -5,6 +5,8 @@ import SingleComment from './SingleComment'
 
 function Comment(props) {
 
+    const postId = props.postId
+
     const user = useSelector(state => state.user)
     const [commentValue,setcommentValue] = useState("")
 
@@ -30,7 +32,7 @@ function Comment(props) {
                     alert('댓글 등록을 실패하였습니다.')
         })
     }
-    
+
     return (
         <div>
             <br />
@@ -38,7 +40,12 @@ function Comment(props) {
             <hr /> 
 
             {/* Comment Lists */}
-            <SingleComment />
+             {console.log(props.CommentLists)}
+
+            {props.commentList && props.commentList.map((comment, index)=>(
+                <SingleComment comment={comment} postId={postId}/>                
+            ))}
+
             {/* Root Comment Form */}
 
             <form style={{ display: 'flex' }} onSubmit={onSubmit} >

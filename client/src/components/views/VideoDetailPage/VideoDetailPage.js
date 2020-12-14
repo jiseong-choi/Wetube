@@ -12,6 +12,7 @@ function VideoDetailPage(props) {
         videoId: videoId
     }
     const [Video, setVideo] = useState([])
+    const [Comments,setComments] = useState([])
     
     useEffect(() => {
         axios.post('/api/video/getVideo', videoVariable)
@@ -21,6 +22,14 @@ function VideoDetailPage(props) {
                     setVideo(response.data.video)
                 } else {
                     alert('Failed to get video Info')
+                }
+            })
+        axios.post('/api/comment/getComments', videoVariable)
+            .then(response => {
+                if (response.data.success) {
+                    setComments(response.data.comments)
+                } else {
+                    alert('댓글을 가져오는데 실패했습니다.')
                 }
             })
     }, [])
@@ -45,7 +54,7 @@ function VideoDetailPage(props) {
                             />
                             <div></div>
                         </List.Item>
-                        <Comment postId={videoId} />
+                        <Comment commentList={Comments} postId={videoId} />
                     </div>
                 </Col>
                 <Col lg={6} xs={24}>
