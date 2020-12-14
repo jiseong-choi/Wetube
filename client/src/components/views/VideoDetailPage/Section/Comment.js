@@ -1,8 +1,10 @@
 import Axios from 'axios'
-import React,{useState} from 'react'
+import React, { useState } from 'react'
+import {useSelector} from 'react-redux'
 
-function Comment() {
+function Comment(props) {
 
+    const user = useSelector(state => state.user)
     const [commentValue,setcommentValue] = useState("")
 
     const handleClick = (e) => {
@@ -13,13 +15,19 @@ function Comment() {
         e.preventDefault()
 
         const variables = {
-            content: ,
-            writer: ,
-            postId: ,
+            content: commentValue,
+            writer: user.userData._id,
+            postId: props.postId,
 
         }
         
-        Axios.post('/api/comment/saveComment',variables)
+        Axios.post('/api/comment/saveComment', variables)
+            .then(response => {
+                if (response.data.success) {
+                    console.log(response.data)
+                } else
+                    alert('댓글 등록을 실패하였습니다.')
+        })
     }
     
     return (
