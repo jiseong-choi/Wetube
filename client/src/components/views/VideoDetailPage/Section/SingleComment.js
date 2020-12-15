@@ -31,7 +31,7 @@ function SingleComment(props) {
             content: CommentValue,
             writer: user.userData._id,
             postId: props.postId,
-
+            responseTo:props.comment._id
         }
         
         Axios.post('/api/comment/saveComment', variables)
