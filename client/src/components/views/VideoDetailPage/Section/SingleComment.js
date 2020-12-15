@@ -38,6 +38,8 @@ function SingleComment(props) {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data)
+
+                    props.refreshFunction(response.data.result)
                 } else
                     alert('댓글 등록을 실패하였습니다.')
         })

@@ -28,6 +28,8 @@ function Comment(props) {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data.result)
+
+                    props.refreshFunction(response.data.result)
                 } else
                     alert('댓글 등록을 실패하였습니다.')
         })
@@ -43,7 +45,7 @@ function Comment(props) {
 
             {props.CommentLists && props.CommentLists.map((comment, index) => (
                 (!comment.responseTo &&
-                    <SingleComment key={index} comment={comment} postId={postId}/>
+                    <SingleComment refreshFunction={props.refreshFunction} key={index} comment={comment} postId={postId} />
                 )                
             ))}
 
