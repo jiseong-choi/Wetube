@@ -49,8 +49,8 @@ function SingleComment(props) {
         <div>
             <Comment
                 actions={actions}
-                author={props.comment.writer}
-                avatar={<Avatar src={props.comment.writer.image} alt />}
+                author={props.comment.writer.name}
+                avatar={<Avatar src={props.comment.writer.image} alt='image' />}
                 content={<p>{ props.comment.content }</p>}
             />
             {OpenRelpy &&

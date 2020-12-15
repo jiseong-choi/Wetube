@@ -1,25 +1,24 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const commentSchema = mongoose.Schema({
     writer: {
         type: Schema.Types.ObjectId,
-        ref:'User'
-    },
+        ref: 'User'
+    }, 
     postId: {
         type: Schema.Types.ObjectId,
-        ref:'Video'
+        ref: 'Video'
     },
     responseTo: {
         type: Schema.Types.ObjectId,
-        ref:'User'
+        ref: 'User'
     },
     content: {
-        type:String
+        type: String
     }
-}, {timestamps:true})
 
-
+}, { timestamps: true })
 
 
 const Comment = mongoose.model('Comment', commentSchema);

@@ -27,7 +27,7 @@ function Comment(props) {
         Axios.post('/api/comment/saveComment', variables)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data)
+                    console.log(response.data.result)
                 } else
                     alert('댓글 등록을 실패하였습니다.')
         })
@@ -40,9 +40,8 @@ function Comment(props) {
             <hr /> 
 
             {/* Comment Lists */}
-             {console.log(props.CommentLists)}
 
-            {props.commentList && props.commentList.map((comment, index)=>(
+            {props.CommentLists && props.CommentLists.map((comment, index)=>(
                 <SingleComment comment={comment} postId={postId}/>                
             ))}
 
