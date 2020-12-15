@@ -2,6 +2,7 @@ import Axios from 'axios'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import SingleComment from './SingleComment'
+import ReplyComment from './ReplyComment'
 
 function Comment(props) {
 
@@ -28,7 +29,7 @@ function Comment(props) {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data.result)
-
+                    setcommentValue("")
                     props.refreshFunction(response.data.result)
                 } else
                     alert('댓글 등록을 실패하였습니다.')
@@ -45,7 +46,10 @@ function Comment(props) {
 
             {props.CommentLists && props.CommentLists.map((comment, index) => (
                 (!comment.responseTo &&
-                    <SingleComment refreshFunction={props.refreshFunction} key={index} comment={comment} postId={postId} />
+                    <React.Fragment>
+                        <SingleComment refreshFunction={props.refreshFunction} key={index} comment={comment} postId={postId} />
+                        <ReplyComment />
+                    </React.Fragment>
                 )                
             ))}
 
