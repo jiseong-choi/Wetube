@@ -21,7 +21,7 @@ function SingleComment(props) {
     ]
 
     const onHandleChange = (e) => {
-        setCommentValue(e.target.CommentValue)
+        setCommentValue(e.currentTarget.value)
     }
 
     const onSubmit = (e) => {

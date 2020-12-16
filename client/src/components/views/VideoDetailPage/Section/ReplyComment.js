@@ -1,10 +1,19 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import SingleComment from './SingleComment'
 
 function ReplyComment(props) {
 
+    const [ChildCommentNumber, setChildCommentNumber] = useState(0)
+    const [OpenReplyComments, setOpenReplyComments] = useState(false)
     useEffect(() => {
-        
+        let commentNumber = 0;
+
+        props.CommentLists.map((comment) => {
+            if (comment.responseTo === props.parentCommentId) {
+                commentNumber++;
+            }
+        })
+        setChildCommentNumber(commentNumber)
     }, [])
 
     const renderReplyComment = (parentCommentId) => {
@@ -21,12 +30,20 @@ function ReplyComment(props) {
         ))
     }
 
+    const onHandleChange = () => {
+        setOpenReplyComments(!OpenReplyComments)
+    }
+
     return (
         <div>
-            <p style={{fontSize:'14px',margin:'0',clolor:'gray'}} onClick >
-                View 1 more comment(s)
-            </p>
-            {renderReplyComment(props.parentCommentId)}
+            {ChildCommentNumber > 0 &&
+                <p style={{fontSize:'14px',margin:'0',color:'gray'}} onClick={onHandleChange} >
+                View {ChildCommentNumber} more comment(s)
+                </p>   
+            }
+            {OpenReplyComments &&
+                renderReplyComment(props.parentCommentId)
+            }
         </div>
     )
 }

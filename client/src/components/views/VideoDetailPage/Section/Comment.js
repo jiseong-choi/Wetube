@@ -48,7 +48,7 @@ function Comment(props) {
                 (!comment.responseTo &&
                     <React.Fragment>
                         <SingleComment refreshFunction={props.refreshFunction} key={index} comment={comment} postId={postId} />
-                        <ReplyComment parentCommentId={comment._id} refreshFunction={props.refreshFunction} CommentLists={props.CommentLists} postId={postId} />
+                    <ReplyComment parentCommentId={comment._id} refreshFunction={props.refreshFunction} CommentLists={props.CommentLists} postId={postId} />
                     </React.Fragment>
                 )                
             ))}
