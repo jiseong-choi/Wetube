@@ -1,7 +1,11 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import SingleComment from './SingleComment'
 
 function ReplyComment(props) {
+
+    useEffect(() => {
+        
+    }, [])
 
     const renderReplyComment = (parentCommentId) => {
         props.CommentLists.map((comment, index) => (
@@ -10,7 +14,7 @@ function ReplyComment(props) {
                     comment.responseTo === parentCommentId &&
                     <div>
                         <SingleComment refreshFunction={props.refreshFunction} key={index} comment={comment} postId={props.postId} />
-                        <ReplyComment  CommentLists={props.CommentLists} />
+                        <ReplyComment parentCommentId={comment._id} CommentLists={props.CommentLists} postId={props.postId} />
                     </div>
                 }
             </React.Fragment>
