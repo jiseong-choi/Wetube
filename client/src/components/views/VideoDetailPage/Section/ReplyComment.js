@@ -16,7 +16,7 @@ function ReplyComment(props) {
         setChildCommentNumber(commentNumber)
     }, [])
 
-    const renderReplyComment = (parentCommentId) => {
+    let renderReplyComment = (parentCommentId) => {
         props.CommentLists.map((comment, index) => (
             <React.Fragment>
                 {
@@ -32,6 +32,7 @@ function ReplyComment(props) {
 
     const onHandleChange = () => {
         setOpenReplyComments(!OpenReplyComments)
+        console.log(OpenReplyComments)
     }
 
     return (

@@ -57,7 +57,7 @@ function SingleComment(props) {
             />
             {OpenRelpy &&
             <form style={{ display: 'flex' }} onSubmit={onSubmit} >
-                <textarea
+                <TextArea
                     style={{ width: '100%', borderRadius: '5px' }}
                     onChange={onHandleChange}
                     value={CommentValue}

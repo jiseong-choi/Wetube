@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import SingleComment from './SingleComment'
 import ReplyComment from './ReplyComment'
+import {Input} from 'antd'
+const { TextArea } = Input;
 
 function Comment(props) {
 
@@ -48,7 +50,7 @@ function Comment(props) {
                 (!comment.responseTo &&
                     <React.Fragment>
                         <SingleComment refreshFunction={props.refreshFunction} key={index} comment={comment} postId={postId} />
-                    <ReplyComment parentCommentId={comment._id} refreshFunction={props.refreshFunction} CommentLists={props.CommentLists} postId={postId} />
+                        <ReplyComment parentCommentId={comment._id} refreshFunction={props.refreshFunction} CommentLists={props.CommentLists} postId={postId} />
                     </React.Fragment>
                 )                
             ))}
@@ -56,7 +58,7 @@ function Comment(props) {
             {/* Root Comment Form */}
 
             <form style={{ display: 'flex' }} onSubmit={onSubmit} >
-                <textarea
+                <TextArea
                     style={{ width: '100%', borderRadius: '5px' }}
                     onChange={handleClick}
                     value={commentValue}
